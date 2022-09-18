@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Julio Sierra\\.nuget\\packages\\": {}
+    "C:\\Users\\julio\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Julio Sierra\\source\\repos\\ManejoPresupuesto\\ManejoPresupuesto\\ManejoPresupuesto.csproj",
+      "projectUniqueName": "C:\\Users\\julio\\source\\repos\\Jayus1\\ManejoDePresupuesto\\ManejoPresupuesto\\ManejoPresupuesto.csproj",
       "projectName": "ManejoPresupuesto",
-      "projectPath": "C:\\Users\\Julio Sierra\\source\\repos\\ManejoPresupuesto\\ManejoPresupuesto\\ManejoPresupuesto.csproj",
-      "packagesPath": "C:\\Users\\Julio Sierra\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Julio Sierra\\source\\repos\\ManejoPresupuesto\\ManejoPresupuesto\\obj\\",
+      "projectPath": "C:\\Users\\julio\\source\\repos\\Jayus1\\ManejoDePresupuesto\\ManejoPresupuesto\\ManejoPresupuesto.csproj",
+      "packagesPath": "C:\\Users\\julio\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\julio\\source\\repos\\Jayus1\\ManejoDePresupuesto\\ManejoPresupuesto\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Julio Sierra\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\julio\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -51,7 +51,8 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -63,7 +64,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.401\\RuntimeIdentifierGraph.json"
       }
     }
   }

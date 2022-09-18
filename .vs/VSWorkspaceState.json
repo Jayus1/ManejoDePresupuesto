@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\ManejoPresupuesto",
+    "\\ManejoPresupuesto\\Controllers"
   ],
+  "SelectedNode": "\\ManejoPresupuesto.sln",
   "PreviewInSolutionExplorer": false
 }
