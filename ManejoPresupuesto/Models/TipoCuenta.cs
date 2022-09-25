@@ -9,11 +9,10 @@ namespace ManejoPresupuesto.Models
     {
         public int Id { get; set; }
 
-        [Required (ErrorMessage="El campo {0} no puede estar vacio")]
-        //[StringLength (maximumLength: 50, MinimumLength = 3, ErrorMessage ="La Longitud del campo {0} debe ser entre {2} y {1}")]          
+        //[StringLength (maximumLength: 50, MinimumLength = 3, ErrorMessage ="La Longitud del campo {0} debe ser entre {2} y {1}")]
+        [Required (ErrorMessage="El campo {0} no puede estar vacio")]          
         [PrimeraLetraMayuscula]
-        [Remote(action: "VerificarExisteTipoCuenta", controller: "TiposCuentas")]
-        [DisplayName("nombre")]
+        [Remote(action: "VerificacionExisteTipoCuenta", controller: "TiposCuentas")]
         public string Nombre { get; set; }
         public int UsuarioId { get; set; }
         public int Orden { get; set; }
