@@ -6,7 +6,7 @@ using Microsoft.Data.SqlClient;
 
 namespace ManejoPresupuesto.Controllers
 {
-    public class TiposCuentasController: Controller
+    public class TiposCuentasController : Controller
     {
         //private readonly string connectionString;
         private readonly IRepositorioTiposCuentas repositorioTiposCuentas;
@@ -25,7 +25,7 @@ namespace ManejoPresupuesto.Controllers
             var usuarioId = servicioUsuario.ObtenerUsuarioId();
             var tiposCuentas = await repositorioTiposCuentas.Obtener(usuarioId);
             return View(tiposCuentas);
-        }
+        }  
 
         [HttpGet]
         public IActionResult Crear()
@@ -35,9 +35,9 @@ namespace ManejoPresupuesto.Controllers
             //    var query = connection.Query("Select 1").FirstOrDefault();
             //}
 
-                return View();
+            return View();
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Crear(TipoCuenta tiposCuentas)
         {
@@ -49,11 +49,11 @@ namespace ManejoPresupuesto.Controllers
             tiposCuentas.UsuarioId = servicioUsuario.ObtenerUsuarioId();
             var yaExisteTiposCuentas = await repositorioTiposCuentas.Existe(tiposCuentas.Nombre, tiposCuentas.UsuarioId);
 
-            if(yaExisteTiposCuentas)
+            if (yaExisteTiposCuentas)
             {
-                ModelState.AddModelError(nameof(tiposCuentas.Nombre), 
+                ModelState.AddModelError(nameof(tiposCuentas.Nombre),
                     $"El nombre {tiposCuentas.Nombre} ya existe.");
-                
+
                 return View(tiposCuentas);
             }
 
@@ -67,7 +67,7 @@ namespace ManejoPresupuesto.Controllers
             var usuarioId = servicioUsuario.ObtenerUsuarioId();
             var tipoCuenta = await repositorioTiposCuentas.ObtenerPorId(id, usuarioId);
 
-            if(tipoCuenta is null)
+            if (tipoCuenta is null)
             {
                 return RedirectToAction("NoEncontrado", "Home");
             }
@@ -82,7 +82,7 @@ namespace ManejoPresupuesto.Controllers
             var usuarioId = servicioUsuario.ObtenerUsuarioId();
             var tipoCuentaExiste = await repositorioTiposCuentas.ObtenerPorId(tipoCuenta.Id, usuarioId);
 
-            if(tipoCuentaExiste is null)
+            if (tipoCuentaExiste is null)
             {
                 return RedirectToAction("NoEncontrado", "Home");
             }
@@ -94,7 +94,7 @@ namespace ManejoPresupuesto.Controllers
         {
             var usuarioId = servicioUsuario.ObtenerUsuarioId();
             var tipoCuenta = await repositorioTiposCuentas.ObtenerPorId(id, usuarioId);
-                if(tipoCuenta is null)
+            if (tipoCuenta is null)
             {
                 return RedirectToAction("NoEncontrado", "Home");
             }
@@ -106,7 +106,7 @@ namespace ManejoPresupuesto.Controllers
         {
             var usuarioId = servicioUsuario.ObtenerUsuarioId();
             var tipoCuenta = await repositorioTiposCuentas.ObtenerPorId(id, usuarioId);
-                if (tipoCuenta is null)
+            if (tipoCuenta is null)
             {
                 return RedirectToAction("NoEncontrado", "Home");
             }
@@ -119,13 +119,33 @@ namespace ManejoPresupuesto.Controllers
         {
             var usuarioId = servicioUsuario.ObtenerUsuarioId();
             var yaExisteTipoCuenta = await repositorioTiposCuentas.Existe(nombre, usuarioId);
-            
-            if(yaExisteTipoCuenta)
+
+            if (yaExisteTipoCuenta)
             {
                 return Json($"El nombre {nombre} ya existe");
             }
             return Json(true);
-        
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Ordenar([FromBody] int[] id)
+        {
+            var usuarioId = servicioUsuario.ObtenerUsuarioId();
+            var tiposCuentas = await repositorioTiposCuentas.Obtener(usuarioId);
+            var idsTiposCuentas = tiposCuentas.Select(x => x.Id);
+
+            var idsTiposCuentasNoPertenecenAlUsuario = idsTiposCuentas.Except(idsTiposCuentas).ToList();
+
+            if(idsTiposCuentasNoPertenecenAlUsuario.Count > 0)
+            {
+                return Forbid();
+            }
+            var tiposCuentaOrdenados = idsTiposCuentas.Select((valor, indice) => 
+            new TipoCuenta() { Id = valor, Orden = indice + 1 }).AsEnumerable();
+
+            await repositorioTiposCuentas.Ordenar(tiposCuentaOrdenados);
+            return Ok();
         }
     }
 }
