@@ -1,4 +1,4 @@
-﻿using Dapper;
+﻿ using Dapper;
 using ManejoPresupuesto.Models;
 using Microsoft.Data.SqlClient;
 using System.Data;
@@ -59,9 +59,9 @@ namespace ManejoPresupuesto.Servicios
         public async Task<TipoCuenta> ObtenerPorId(int id, int usuarioId)
         {
             using var connection = new SqlConnection(connectionString);
-            return await connection.QueryFirstOrDefaultAsync<TipoCuenta>($"SELECT Id, Nombre, Orden " +
-                                                                        $"FROM TiposCuentas " +
-                                                                        $"WHERE Id = @id AND UsuarioId = @UsuarioId",
+            return await connection.QueryFirstOrDefaultAsync<TipoCuenta>(@"SELECT Id, Nombre, Orden 
+                                                                           FROM TiposCuentas
+                                                                           WHERE Id = @id AND UsuarioId = @UsuarioId",
                                                                         new { id, usuarioId });
         }
 

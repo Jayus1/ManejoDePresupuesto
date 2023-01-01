@@ -25,7 +25,7 @@ namespace ManejoPresupuesto.Controllers
             var usuarioId = servicioUsuario.ObtenerUsuarioId();
             var tiposCuentas = await repositorioTiposCuentas.Obtener(usuarioId);
             return View(tiposCuentas);
-        }
+        }  
 
         [HttpGet]
         public IActionResult Crear()
