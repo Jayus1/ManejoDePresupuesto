@@ -36,50 +36,12 @@
     </tbody>
 </table>
 
-@*@section Scripts{
-    <script>
-
-        const urlOrdenar='@Url.Action("ordenar")';
-
-        $(function(){
-            $("#reordenable").sortable({
-                stop.async function(e, ui){
-                   await actualizarOrdenes#if();
-                }
-            });
-
-           async  function actualizarOrdenes(){
-                const ids = obtenerIdsDeElementos();
-               await  enviarIdsAlBackend(ids);
-            }
-
-        function obtenerIdsDeElementos(){
-            const ids = $(".ids".map(function(){
-            return $(this).val();
-            }).get():)
-        }
-
-        async function enviarIdsBackend(ids){
-            var data=JSON.string(ids);
-
-            await fetch(urlOrdenar,{
-            method: 'POST',
-            body: data,
-            headers: {
-                'Content.Type':'application/json'
-            }
-            })
-        }
-
-        })
-    </script>*@
     @section Scripts{
         <script>
 
-            const urlOrdenar='@Url.Action("Ordenar")';
+            const urlOrdenar='@Url.Action("ordenar")';
 
-            $(function()  b 
-            {
+            $(function(){
                 $("#reordenable").sortable({
                     stop: async function(e,ui){
                        await actualizarOrdenes();
@@ -89,13 +51,13 @@
 
             async function actualizarOrdenes(){
                 const ids = obtenerIdsDeElementos();
-                await enviarIdsAlBackend(ids);
+                await enviarIdsBackend(ids);
             }
 
 
             function obtenerIdsDeElementos(){
             const ids = $(".ids").map(function(){
-            return $(this).val();
+                        return $(this).val();
             }).get();
 
              return ids;
@@ -114,5 +76,4 @@
             }
          })
         </script>
-    
-}
+    }
