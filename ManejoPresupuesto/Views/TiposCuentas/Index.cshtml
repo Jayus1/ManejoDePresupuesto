@@ -76,9 +76,10 @@
     @section Scripts{
         <script>
 
-            const urlOrdenar='@Url.Action("ordenar")';
+            const urlOrdenar='@Url.Action("Ordenar")';
 
-            $(function(){
+            $(function()  b 
+            {
                 $("#reordenable").sortable({
                     stop: async function(e,ui){
                        await actualizarOrdenes();
@@ -113,5 +114,5 @@
             }
          })
         </script>
-    }
+    
 }

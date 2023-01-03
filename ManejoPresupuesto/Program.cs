@@ -9,6 +9,10 @@ builder.Services.AddTransient<IServicioUsuario, ServicioUsuarios>();
 
 var app = builder.Build();
 
+//app.Run(async (context) => {
+//    await context.Response.WriteAsync("Hello world!");
+//});
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
