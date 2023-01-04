@@ -8,57 +8,57 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = ManejoPresupuesto
 build_property.RootNamespace = ManejoPresupuesto
-build_property.ProjectDir = C:\Users\julio\source\repos\Jayus1\ManejoDePresupuesto\ManejoPresupuesto\
+build_property.ProjectDir = C:\Users\Julio Sierra\source\repos\ManejoPresupuesto\ManejoPresupuesto\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\julio\source\repos\Jayus1\ManejoDePresupuesto\ManejoPresupuesto
+build_property.MSBuildProjectDirectory = C:\Users\Julio Sierra\source\repos\ManejoPresupuesto\ManejoPresupuesto
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/julio/source/repos/Jayus1/ManejoDePresupuesto/ManejoPresupuesto/Views/Home/Index.cshtml]
+[C:/Users/Julio Sierra/source/repos/ManejoPresupuesto/ManejoPresupuesto/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/julio/source/repos/Jayus1/ManejoDePresupuesto/ManejoPresupuesto/Views/Home/NoEncontrado.cshtml]
+[C:/Users/Julio Sierra/source/repos/ManejoPresupuesto/ManejoPresupuesto/Views/Home/NoEncontrado.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxOb0VuY29udHJhZG8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/julio/source/repos/Jayus1/ManejoDePresupuesto/ManejoPresupuesto/Views/Home/Privacy.cshtml]
+[C:/Users/Julio Sierra/source/repos/ManejoPresupuesto/ManejoPresupuesto/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/julio/source/repos/Jayus1/ManejoDePresupuesto/ManejoPresupuesto/Views/Shared/Error.cshtml]
+[C:/Users/Julio Sierra/source/repos/ManejoPresupuesto/ManejoPresupuesto/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/julio/source/repos/Jayus1/ManejoDePresupuesto/ManejoPresupuesto/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Julio Sierra/source/repos/ManejoPresupuesto/ManejoPresupuesto/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/julio/source/repos/Jayus1/ManejoDePresupuesto/ManejoPresupuesto/Views/TiposCuentas/Borrar.cshtml]
+[C:/Users/Julio Sierra/source/repos/ManejoPresupuesto/ManejoPresupuesto/Views/TiposCuentas/Borrar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb3NDdWVudGFzXEJvcnJhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/julio/source/repos/Jayus1/ManejoDePresupuesto/ManejoPresupuesto/Views/TiposCuentas/Crear.cshtml]
+[C:/Users/Julio Sierra/source/repos/ManejoPresupuesto/ManejoPresupuesto/Views/TiposCuentas/Crear.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb3NDdWVudGFzXENyZWFyLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/julio/source/repos/Jayus1/ManejoDePresupuesto/ManejoPresupuesto/Views/TiposCuentas/Editar.cshtml]
+[C:/Users/Julio Sierra/source/repos/ManejoPresupuesto/ManejoPresupuesto/Views/TiposCuentas/Editar.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb3NDdWVudGFzXEVkaXRhci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/julio/source/repos/Jayus1/ManejoDePresupuesto/ManejoPresupuesto/Views/TiposCuentas/Index.cshtml]
+[C:/Users/Julio Sierra/source/repos/ManejoPresupuesto/ManejoPresupuesto/Views/TiposCuentas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb3NDdWVudGFzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/julio/source/repos/Jayus1/ManejoDePresupuesto/ManejoPresupuesto/Views/_ViewImports.cshtml]
+[C:/Users/Julio Sierra/source/repos/ManejoPresupuesto/ManejoPresupuesto/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/julio/source/repos/Jayus1/ManejoDePresupuesto/ManejoPresupuesto/Views/_ViewStart.cshtml]
+[C:/Users/Julio Sierra/source/repos/ManejoPresupuesto/ManejoPresupuesto/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/julio/source/repos/Jayus1/ManejoDePresupuesto/ManejoPresupuesto/Views/Shared/_Layout.cshtml]
+[C:/Users/Julio Sierra/source/repos/ManejoPresupuesto/ManejoPresupuesto/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-1p7shqym15
