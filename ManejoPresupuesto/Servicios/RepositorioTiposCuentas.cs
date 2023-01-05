@@ -11,7 +11,7 @@ namespace ManejoPresupuesto.Servicios
         public RepositorioTiposCuentas(IConfiguration configuration)
         {
             connectionString = configuration.GetConnectionString("DefaultConnection");
-            string command = 
+            
         }
 
         public async Task Crear(TipoCuenta tiposCuentas)
