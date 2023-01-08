@@ -6,8 +6,10 @@ namespace ManejoPresupuesto.Servicios
 {
     public interface IRepositorioCuentas
     {
+        Task Actualizar(CuentaCreacionViewModel cuenta);
         Task<IEnumerable<Cuenta>> Buscar(int usuarioId);
         Task Crear(Cuenta cuenta);
+        Task<Cuenta> ObtenerPorId(int id, int usuarioId);
     }
 
     public class RepositorioCuentas : IRepositorioCuentas
@@ -41,5 +43,25 @@ namespace ManejoPresupuesto.Servicios
                                                        ORDER BY tc.Orden", new { usuarioId });
         }
 
+        public async Task<Cuenta> ObtenerPorId (int id, int usuarioId)
+        {
+            using var connection= new SqlConnection(connectionstring);
+
+            return await connection.QueryFirstOrDefaultAsync<Cuenta>(@"
+                                                       SELECT Cuentas.Id, Cuentas.Nombre, Balance, Descripcion, tc.cuentaId
+                                                       FROM Cuentas
+                                                       INNER JOIN TiposCuentas tc
+                                                       ON tc.Id= Cuentas.TipoCuentaId
+                                                       WHERE tc.UsuarioId = @UsuarioId AND Cuentas.Id=@Id", new {usuarioId, id});
+        }
+
+        public async Task Actualizar(CuentaCreacionViewModel cuenta)
+        {
+            using var connection= new SqlConnection(connectionstring);
+            await connection.ExecuteAsync(@"UPDATE Cuentas
+                                            SET Nombre= @Nombre, Balance= @Balance, Descripcion= @Descripcion, TipoCuenta= @TipoCuentaId
+                                            WHERE Id= @id",
+                                            cuenta);
+        }
     }
 }

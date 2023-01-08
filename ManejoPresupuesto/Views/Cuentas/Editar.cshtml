@@ -1,5 +1,43 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model CuentaCreacionViewModel
 @{
+    ViewData["Title"] = "Editar Cuenta";
+}
+
+<h1>Editar cuenta: @Model.Nombre</h1>
+
+<form asp-action="Editar">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="Nombre" class="form-label"></label>
+        <input asp-for="Nombre" class="form-control" />
+        <span asp-validation-for="Nombre" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="TipoCuentaId" class="form-label"></label>
+        <select asp-for="TipoCuentaId" asp-items="Model.TiposCuentas" class="form-select"></select>
+        <span asp-validation-for="TipoCuentaId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Balance" class="form-label"></label>
+        <input asp-for="Balance" class="form-control" />
+        <span asp-validation-for="Balance" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Descripcion" class="form-text"></label>
+        <textarea asp-for="Descripcion" class="form-control"></textarea>
+        <span asp-validation-for="Descripcion" class="text-danger"></span>
+    </div>
+
+    <button asp-action="Crear" class="btn btn-primary">Enviar</button>
+    <a asp-action="Index" class="btn btn-danger">Cancelar</a>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
 }
