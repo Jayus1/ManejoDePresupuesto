@@ -122,3 +122,4 @@ C:\Users\Julio Sierra\source\repos\ManejoPresupuesto\ManejoPresupuesto\obj\Debug
 C:\Users\Julio Sierra\source\repos\ManejoPresupuesto\ManejoPresupuesto\obj\Debug\net6.0\ManejoPresupuesto.pdb
 C:\Users\Julio Sierra\source\repos\ManejoPresupuesto\ManejoPresupuesto\obj\Debug\net6.0\ManejoPresupuesto.genruntimeconfig.cache
 C:\Users\Julio Sierra\source\repos\ManejoPresupuesto\ManejoPresupuesto\obj\Debug\net6.0\ref\ManejoPresupuesto.dll
+C:\Users\julio\source\repos\Jayus1\ManejoDePresupuesto\ManejoPresupuesto\obj\Debug\net6.0\scopedcss\Views\Cuentas\Index.cshtml.rz.scp.css
