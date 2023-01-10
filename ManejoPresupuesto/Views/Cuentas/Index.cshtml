@@ -48,7 +48,7 @@
         <div class="accordion-item"> 
             <h2 class="accordion-header" id="cabeceraUno">
                 @{
-                    var id = tipoCuenta.TipoCuenta.Replace("", "");
+                    var id = tipoCuenta.TipoCuenta.Replace(" ","");
                     var dataBSTarget = "#" + id;
                     var claseTipoCuenta = ObtenerClaseBalance(tipoCuenta.Balance);
                 }
@@ -72,17 +72,14 @@
                                   <i class="bi-pencil-fill"></i>
                               </a>
 
-                                    <a class="btn btn-danger">
-                                        <i class="bi-trash-fill"></i>
-                                    </a>
-                                </span>
-                             <span><strong>@cuenta.Nombre</strong>
-                              <a class="btn btn-primary">
-                                  <i class="bi-pencil-fill"></i>
-                              </a>  </span>
+                              <a class="btn btn-danger">
+                                  <i class="bi-trash-fill"></i>
+                              </a>
+                            </span>
+                  
                             <span class="@claseCuenta">@FormatearBalance(cuenta.Balance)</span>
                             </li>
-                        }
+                    }
                 </ul>
                 </div>
 

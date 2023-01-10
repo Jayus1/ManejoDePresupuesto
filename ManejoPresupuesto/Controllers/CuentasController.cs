@@ -33,7 +33,7 @@ namespace ManejoPresupuesto.Controllers
         public async Task<ActionResult> Crear(CuentaCreacionViewModel cuenta)
         {
             var usuarioId = servicioUsuario.ObtenerUsuarioId();
-            var tipoCuenta = await repositorioTiposCuentas.ObtenerPorId(cuenta.Id, usuarioId);
+            var tipoCuenta = await repositorioTiposCuentas.ObtenerPorId(cuenta.TipoCuentaId, usuarioId);
 
             if(tipoCuenta is null)
             {
@@ -109,7 +109,7 @@ namespace ManejoPresupuesto.Controllers
             var tipoCuenta = await repositorioTiposCuentas.ObtenerPorId(cuentaEditar.TipoCuentaId, usuarioId);
 
             if(tipoCuenta is null)
-            {
+            {   
                 return RedirectToAction("NoEncontrado", "Home");
 
             }
