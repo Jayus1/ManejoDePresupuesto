@@ -48,7 +48,7 @@ namespace ManejoPresupuesto.Servicios
             using var connection= new SqlConnection(connectionstring);
 
             return await connection.QueryFirstOrDefaultAsync<Cuenta>(@"
-                                                       SELECT Cuentas.Id, Cuentas.Nombre, Balance, Descripcion, tc.cuentaId
+                                                       SELECT Cuentas.Id, Cuentas.Nombre, Balance, Descripcion, tc.Id AS TipoCuentaId 
                                                        FROM Cuentas
                                                        INNER JOIN TiposCuentas tc
                                                        ON tc.Id= Cuentas.TipoCuentaId
@@ -59,7 +59,7 @@ namespace ManejoPresupuesto.Servicios
         {
             using var connection= new SqlConnection(connectionstring);
             await connection.ExecuteAsync(@"UPDATE Cuentas
-                                            SET Nombre= @Nombre, Balance= @Balance, Descripcion= @Descripcion, TipoCuenta= @TipoCuentaId
+                                            SET Nombre= @Nombre, Balance= @Balance, Descripcion= @Descripcion, TipoCuentaId= @TipoCuentaId
                                             WHERE Id= @id",
                                             cuenta);
         }
