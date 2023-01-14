@@ -9,8 +9,8 @@ namespace ManejoPresupuesto.Models
         [Required(ErrorMessage ="Este campo {0} es requerido")]
         [StringLength(maximumLength:50, ErrorMessage ="Este campo no puede tener mas caracteres de {1}")]
         public string Nombre { get; set; }
-
-        public TipoOperacion TipoOperacion { get; set; }
+        [Display(Name = "Tipo de Operacion")]
+        public TipoOperacion TipoOperacionId { get; set; }
 
         public int UsuarioId { get; set; }
 
