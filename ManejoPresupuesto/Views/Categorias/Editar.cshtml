@@ -10,7 +10,7 @@
 <form asp-action="Editar">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <input tuype="hiddem" asp-for="Id" />
+    <input type="hidden" asp-for="Id" />
 
     <div class="mb-3">
         <label asp-for="Nombre" class="form-label"></label>
@@ -20,7 +20,7 @@
 
     <div class="mb-3">
         <label asp-for="TipoOperacionId" class="form-label"></label>
-        <select asp-for="TipoOperacionId" asp-item="Html.GetEnumSelectList<TipoOperacion>()" class="form-select" />
+        <select asp-for="TipoOperacionId" asp-items="Html.GetEnumSelectList<TipoOperacion>()" class="form-select"></select>
         <span asp-validation-for="TipoOperacionId" class="text-danger"></span>
     </div>
 
