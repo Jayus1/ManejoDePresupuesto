@@ -57,7 +57,7 @@
     <partial name="_ValidationScriptsPartial" />
     <script src="~/js/FormularioTransacciones.js" asp-append-version="true"></script>
     <script>
-               const urlObtenerCategorias = @Url.Action("ObtenerCategorias");
+        const urlObtenerCategorias = '@Url.Action("ObtenerCategorias")';
 
         $(function () {
             inicializarformulariotransacciones(urlObtenerCategorias);

@@ -84,7 +84,7 @@ namespace ManejoPresupuesto.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ObtenerCategoria([FromBody] TipoOperacion tipoOperacion)
+        public async Task<IActionResult> ObtenerCategorias([FromBody] TipoOperacion tipoOperacion)
         {
             var usuarioId = servicioUsuario.ObtenerUsuarioId();
             var categorias = await ObtenerCategorias(usuarioId, tipoOperacion);
