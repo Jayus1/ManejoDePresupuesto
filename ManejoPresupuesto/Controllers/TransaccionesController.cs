@@ -148,7 +148,7 @@ namespace ManejoPresupuesto.Controllers
 
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Borrar(int id)
         {
             var usuarioId = servicioUsuario.ObtenerUsuarioId();
