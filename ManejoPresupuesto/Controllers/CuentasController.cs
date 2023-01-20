@@ -193,6 +193,13 @@ namespace ManejoPresupuesto.Controllers
             modelo.TransaccioneAgrupadas = transaccionesPorFecha;
             modelo.FechaInicio = fechaInicio;
             modelo.FechaFin = fechaFin;
+
+            ViewBag.mesAnterior = fechaInicio.AddMonths(-1);
+            ViewBag.añoAnterior = fechaInicio.AddYears(-1);
+
+            ViewBag.mesPosterior = fechaInicio.AddMonths(+1);
+            ViewBag.añoPosterior = fechaInicio.AddYears(+1);
+
             return View(modelo);
 
         }
