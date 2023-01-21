@@ -49,7 +49,35 @@ if(@Model.TransaccioneAgrupadas.Count()==0)
 else{
     <table class="table">
         <tbody>
-            @foreach
+            @foreach(var transccionAgrupada in Model.TransaccioneAgrupadas)
+            {
+
+                <tr style="background-color: lightblue; font-size:26px">
+                    <td colspan="3">
+                        @transccionAgrupada.FechaTransaccion.Day
+                        <span class="badge btn-secondary">
+                            @transccionAgrupada.FechaTransaccion.ToString("ddd")
+                        </span>
+                    </td>
+                    <td class="activo">@transccionAgrupada.BalanceDepositos.ToString("N")</td>
+                    <td class="pasivo">@transccionAgrupada.BalanceRetiros.ToString("N")</td>
+                </tr>
+                foreach(var transacciones in transccionAgrupada.Transacciones)
+                {
+                    <tr sryle="vertical=align: middle">
+                        <td>
+                            <a asp-controller="transacciones" asp-action="Ediar" asp-route-id="@transacciones.Id" asp-route-urlRetorno="@ViewBag.urlRetorno.">
+                                <i class="bi-pencil"></i>
+                            </a>
+                        </td>
+                        <td>@transacciones.Categoria</td>
+                        <td>@transacciones.Cuenta</td>
+                        <td class="activo">@(transacciones.TipoOperacionId == TipoOperacion.Ingresos) ? transaccion.Monto.ToString("N") : null</td>
+                        <td class="pasivo">@(transacciones.TipoOperacionId == TipoOperacion.Gastos) ? transaccion.Monto.ToString("N") : null</td>
+                    </tr>
+                }
+
+            }
         </tbody>
     </table>
 }
