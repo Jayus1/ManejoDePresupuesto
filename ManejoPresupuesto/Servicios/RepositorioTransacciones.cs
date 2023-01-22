@@ -13,6 +13,7 @@ namespace ManejoPresupuesto.Servicios
         Task Crear(Transaccion transaccion);
         Task<IEnumerable<Transaccion>> ObtenerPorCuentaId(ObtenerTransaccionesPorCuenta modelo);
         Task<Transaccion> ObtenerPorId(int id, int usuarioId);
+        Task<IEnumerable<Transaccion>> ObtenerPorUsuarioId(ParametroObtenerPorUsuario modelo);
     }
 
     public class RepositorioTransacciones : IRepositorioTransacciones
@@ -91,6 +92,22 @@ namespace ManejoPresupuesto.Servicios
                                                             AND t.UsuarioId = @UsuarioId
                                                             AND FechaTransaccion BETWEEN @FechaInicio AND @FechaFIn",modelo);
         }
-        
+
+        public async Task<IEnumerable<Transaccion>> ObtenerPorUsuarioId
+           (ParametroObtenerPorUsuario modelo)
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.QueryAsync<Transaccion>(@"
+                                                            SELECT *
+                                                            FROM Transacciones t
+                                                            INNER JOIN Categorias c
+                                                            ON c.Id=t.CategoriaId
+                                                            INNER JOIN Cuentas cu
+                                                            ON cu.Id=t.CuentaId
+                                                            WHERE  t.UsuarioId = @UsuarioId
+                                                            AND FechaTransaccion BETWEEN @FechaInicio AND @FechaFIn
+                                                            ORDER BY t.FechaTransaccion DESC", modelo);
+        }
+
     }
 }

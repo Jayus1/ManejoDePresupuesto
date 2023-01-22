@@ -16,7 +16,7 @@ namespace ManejoPresupuesto.Controllers
 
         public CuentasController(IRepositorioTiposCuentas repositorioTiposCuentas,
             IServicioUsuario servicioUsuario,
-            IRepositorioCuentas repositorioCuentas, IRepositorioTransacciones repositorioTransacciones
+            IRepositorioCuentas repositorioCuentas, IRepositorioTransacciones repositorioTransacciones,
             IMapper mapper)
         {
             this.repositorioTiposCuentas = repositorioTiposCuentas;
