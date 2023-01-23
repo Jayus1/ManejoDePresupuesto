@@ -14,16 +14,18 @@ namespace ManejoPresupuesto.Controllers
         private readonly IServicioUsuario servicioUsuario;
         private readonly IRepositorioCategorias repositorioCategorias;
         private readonly IMapper mapper;
+        private readonly IServicioReportes servicioReportes;
 
         public TransaccionesController(IRepositorioTransacciones repositorioTransacciones, 
             IRepositorioCuentas repositorioCuentas, IServicioUsuario servicioUsuario, 
-            IRepositorioCategorias repositorioCategorias, IMapper mapper)
+            IRepositorioCategorias repositorioCategorias, IMapper mapper, IServicioReportes servicioReportes)
         {
             this.repositorioTransacciones = repositorioTransacciones;
             this.repositorioCuentas = repositorioCuentas;
             this.servicioUsuario = servicioUsuario;
             this.repositorioCategorias = repositorioCategorias;
             this.mapper = mapper;
+            this.servicioReportes = servicioReportes;
         }
 
         public async Task<IActionResult> Crear()
@@ -74,47 +76,7 @@ namespace ManejoPresupuesto.Controllers
         public async Task<IActionResult> Index(int mes, int año)
         {
             var usuarioId = servicioUsuario.ObtenerUsuarioId();
-            DateTime fechaInicio, fechaFin;
-
-            if (mes <= 0 || mes > 12 || año <= 1900)
-            {
-                var hoy = DateTime.Today;
-                fechaInicio = new DateTime(hoy.Year, hoy.Month, 1);
-            }
-            else
-            {
-                fechaInicio = new DateTime(año, mes, 1);
-            }
-            fechaFin = fechaInicio.AddMonths(1).AddDays(-1);
-
-            var parametro = new ParametroObtenerPorUsuario()
-            {
-               UsuarioId=usuarioId,
-               FechaInicio=fechaInicio,
-               FechaFin=fechaFin
-            };
-
-            var transacciones = await repositorioTransacciones.ObtenerPorUsuarioId(parametro);
-
-            var modelo = new ReporteTransaccionesDetalladas();
-            var transaccionesPorFecha = transacciones.OrderByDescending(x => x.FechaTransaccion)
-                .GroupBy(x => x.FechaTransaccion).Select(grupo => new ReporteTransaccionesDetalladas.TransaccionesPorFechas()
-                {
-                    FechaTransaccion = grupo.Key,
-                    Transacciones = grupo.AsEnumerable()
-                });
-            modelo.TransaccioneAgrupadas = transaccionesPorFecha;
-            modelo.FechaInicio = fechaInicio;
-            modelo.FechaFin = fechaFin;
-
-            ViewBag.mesAnterior = fechaInicio.AddMonths(-1);
-            ViewBag.añoAnterior = fechaInicio.AddYears(-1);
-
-            ViewBag.mesPosterior = fechaInicio.AddMonths(+1);
-            ViewBag.añoPosterior = fechaInicio.AddYears(+1);
-            ViewBag.urlRetorno = HttpContext.Request.Path + HttpContext.Request.QueryString;
-
-
+            var modelo = await servicioReportes.ObtenerReporteTransaccionesDetalladas(usuarioId, mes, año, ViewBag);
             return View(modelo);
         }
 
@@ -216,6 +178,24 @@ namespace ManejoPresupuesto.Controllers
             {
                 return LocalRedirect(urlRetorno);
             }
+        }
+
+        public IActionResult Semanal()
+        {
+            return View();
+        }
+
+        public IActionResult Mensual()
+        {
+            return View();
+        }
+        public IActionResult Calendario()
+        {
+            return View();
+        }
+        public IActionResult ExcelReporte()
+        {
+            return View();
         }
     }
 }

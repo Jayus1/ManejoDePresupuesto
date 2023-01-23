@@ -1,5 +1,7 @@
-﻿@model IEnumerable<Transaccion>
+﻿@model ReporteTransaccionesDetalladas
+
 @{
-    ViewData["Title"] = "Transacciones";
+    ViewData["Title"] = "Reporte Diario";
 }
-<h1> Indice de Transacciones</h1>
+<partial name="_Submenu" model="SubMenuTransacciones.Diario" />
+<partial name="_ReporteTransaccionesDetalladas" model="Model" />
