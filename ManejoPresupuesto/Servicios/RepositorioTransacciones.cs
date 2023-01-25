@@ -100,7 +100,8 @@ namespace ManejoPresupuesto.Servicios
         {
             using var connection = new SqlConnection(connectionString);
             return await connection.QueryAsync<Transaccion>(@"
-                                                            SELECT *
+                                                            SELECT t.Id, t.Monto, t.FechaTransaccion, c.Nombre AS Categoria, 
+                                                            cu.Nombre AS Cuenta, TipoOperacionId, Nota
                                                             FROM Transacciones t
                                                             INNER JOIN Categorias c
                                                             ON c.Id=t.CategoriaId
@@ -116,7 +117,7 @@ namespace ManejoPresupuesto.Servicios
         {
             using var connection = new SqlConnection(connectionString);
             return await connection.QueryAsync<ResultadoObtenerPorSemana>(@"
-                                                                            SELECT datediff(d, @fechaInicio, FechaTransaccion))/7+1 AS Semana,
+                                                                            SELECT datediff(d, @fechaInicio, FechaTransaccion)/7+1 AS Semana,
                                                                             SUM(Monto) AS Monto, cat.TipoOperacionId
                                                                             FROM Transacciones
                                                                             INNER JOIN Categorias cat

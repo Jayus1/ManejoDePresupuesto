@@ -3,3 +3,111 @@
 }
 
 <partial name="_Submenu" model="SubMenuTransacciones.Calendario" />
+
+<div id="calendario"></div>
+
+<div class="modal fade" id="modalTransacciones" tabindex="1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Transacciones del Dia</h5>
+                <button type="button" class="btn btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th colspan="2" id="modalTablaFecha"></th>
+                            <th class="activo" id="modalTablaIngreso"></th>
+                            <th class="pasivo" id="modalTablaGastos"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="modalTAblaCuerpo">
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Script{
+    <script src="~/lib/fullcalendar/main.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            const calendarioEl= document.getElementById("calendario");
+            const calendario=new FullCalendar.Calendar(calendarioEl, {
+            dayMaxEventRows: 3,
+            initialView: 'dayGridMonth',
+            events: '/transacciones/ObtenerTransaccionesCalendario',
+            dateClick: async function(info){
+                await buscarTransaccionesPorFecha(info.dataStr);
+            }
+        });
+
+        calendario.render();
+        })
+
+        async function buscarTransaccionesPorFecha(fecha){
+            const reponse = await fetch(`/transacciones/buscarTransaccionesPorFecha?fecha=${fecha}`,
+            method: 'GET',
+            headers: {
+                'Content-Type':'application/json'
+            
+            });
+
+            const json= await response.json();
+
+            let ingresos = 0;
+            let gastos= 0;
+            const TipoOperacionesIngresos= 1;
+
+            const formateador= new Intl.NumberFormat('en-US',{
+                style: 'currency',
+                currency: 'USD'
+            })
+
+
+            const filas=json.map(transacciones =>{
+                if(transaccion.tipoOperacionId == TipoOperacionesIngresos){
+                    ingresos += transaccion.monto;
+                }
+                else{
+                    gastos += transaccion.monto
+                }
+
+                return `<tr>
+                            <td>${transaccion.categoria}</td>
+                            <td>${transaccion.cuenta}</td>
+                            <td align="right" colspan="2"
+                             class=${transaccion.tipoOperacionId === tipoOperacionesIngresos ?
+                        'activo' : 'pasivo'}>
+                                 ${formateador.format(transaccion.monto)}
+                                 </td>
+                        </tr>`;
+
+            });
+
+            $("modalTablaCuerpo").html(filas);
+            $("modalTablaIngresos").html(formateador.format(ingresos));
+            $("modalTablaGastos").html(formateador.format(gastos));
+            $("modalTablaFlecha").html(filas);
+
+
+
+            const modalTransacciones = 
+            new bootstrap.Modal(document.getElementById('modalTransacciones'));
+
+            modalTransacciones.Show();
+
+        }
+
+
+
+    </script>
+}
