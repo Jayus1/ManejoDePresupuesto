@@ -35,30 +35,29 @@
     </div>
 </div>
 
-@section Script{
+@section Scripts{
     <script src="~/lib/fullcalendar/main.min.js"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function(){
-            const calendarioEl= document.getElementById("calendario");
-            const calendario=new FullCalendar.Calendar(calendarioEl, {
+            const calendarioEl= document.getElementById('calendario');
+            const calendario= new FullCalendar.Calendar(calendarioEl, {
             dayMaxEventRows: 3,
             initialView: 'dayGridMonth',
             events: '/transacciones/ObtenerTransaccionesCalendario',
             dateClick: async function(info){
-                await buscarTransaccionesPorFecha(info.dataStr);
+                await buscarTransaccionesPorFecha(info.dateStr);
             }
         });
 
         calendario.render();
-        })
+        });
 
         async function buscarTransaccionesPorFecha(fecha){
-            const reponse = await fetch(`/transacciones/buscarTransaccionesPorFecha?fecha=${fecha}`,
+            const reponse = await fetch(`/transacciones/ObtenerTransaccionesPorFecha?fecha=${fecha}`,
             method: 'GET',
             headers: {
                 'Content-Type':'application/json'
-            
             });
 
             const json= await response.json();
@@ -70,7 +69,7 @@
             const formateador= new Intl.NumberFormat('en-US',{
                 style: 'currency',
                 currency: 'USD'
-            })
+            });
 
 
             const filas=json.map(transacciones =>{
@@ -96,18 +95,15 @@
             $("modalTablaCuerpo").html(filas);
             $("modalTablaIngresos").html(formateador.format(ingresos));
             $("modalTablaGastos").html(formateador.format(gastos));
-            $("modalTablaFlecha").html(filas);
+            $("modalTablaFlecha").html(fecha);
 
 
 
             const modalTransacciones = 
             new bootstrap.Modal(document.getElementById('modalTransacciones'));
 
-            modalTransacciones.Show();
+            modalTransacciones.show();
 
         }
-
-
-
     </script>
 }

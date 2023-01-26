@@ -15,7 +15,7 @@
 
 <partial name="_Submenu"  model="SubMenuTransacciones.Semanal"/>
 <partial name="_NavegarPorMeses" model="@Model.FechaReferencia" />
-<partial name="_ResumenMontoViewModel" model="@resumenMontos" />
+<partial name="_ResumenMontos" model="@resumenMontos" />
 
 <table class="table" style="font-size: 20px;">
     <thead>
@@ -40,7 +40,7 @@ f
             <td class="activo" style="text-decoration:none">
                 @transaccionesPorSemana.Ingresos
             </td>
-            <td class="Pasivos" style="text-decoration:none">
+            <td class="Pasivo" style="text-decoration:none">
                 @transaccionesPorSemana.Gastos
             </td>
 

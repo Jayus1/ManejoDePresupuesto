@@ -12,7 +12,7 @@
 
 <partial name="_ResumenMontos" model="@resumenMontos"/>
 
-if(@Model.TransaccioneAgrupadas.Count()==0)
+@if(@Model.TransaccioneAgrupadas.Count()==0)
 {
 <h5>No hay datos para mostrar</h5>
 }
@@ -36,14 +36,14 @@ else{
                 {
                     <tr sryle="vertical=align: middle">
                         <td>
-                            <a asp-controller="transacciones" asp-action="Ediar" asp-route-id="@transacciones.Id" asp-route-urlRetorno="@ViewBag.urlRetorno.">
+                            <a asp-controller="transacciones" asp-action="Editar" asp-route-id="@transacciones.Id" asp-route-urlRetorno="@ViewBag.urlRetorno.">
                                 <i class="bi-pencil"></i>
                             </a>
                         </td>
                         <td>@transacciones.Categoria</td>
                         <td>@transacciones.Cuenta</td>
-                        <td class="activo">@(transacciones.TipoOperacionId == TipoOperacion.Ingresos) ? transaccion.Monto.ToString("N") : null</td>
-                        <td class="pasivo">@(transacciones.TipoOperacionId == TipoOperacion.Gastos) ? transaccion.Monto.ToString("N") : null</td>
+                        <td class="activo">@(transacciones.TipoOperacionId == TipoOperacion.Ingresos ? transacciones.Monto.ToString("N") : null) </td>
+                        <td class="pasivo">@(transacciones.TipoOperacionId == TipoOperacion.Gastos ? transacciones.Monto.ToString("N") : null) </td>
                     </tr>
                 }
 

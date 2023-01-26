@@ -240,14 +240,14 @@ namespace ManejoPresupuesto.Controllers
             modelo.FechaReferencia = fechaReferencia;
 
 
-            return View();
+            return View(modelo);
         }
 
         public async Task<IActionResult> Mensual(int año)
         {
             var usuarioId = servicioUsuario.ObtenerUsuarioId();
 
-            if (año == null)
+            if (año == 0)
             {
                 año = DateTime.Today.Year;
             }
@@ -261,7 +261,7 @@ namespace ManejoPresupuesto.Controllers
                 Gastos = x.Where(x => x.TipoOperacionId == TipoOperacion.Gastos).Select(x => x.Monto).FirstOrDefault()
             }).ToList();
 
-            for (int mes = 0; mes <= 12; mes++)
+            for (int mes = 1; mes <= 12; mes++)
             {
                 var transacciones = transaccionesAgrupadas.FirstOrDefault(x => x.Mes == mes);
                 var fechaReferencia = new DateTime(año, mes, 1);
@@ -326,17 +326,11 @@ namespace ManejoPresupuesto.Controllers
             });
 
             return Json(transacciones);
-
-
         }
 
 
         public IActionResult ExcelReporte()
         {
-
-
-
-
             return View();
         }
 
@@ -396,8 +390,6 @@ namespace ManejoPresupuesto.Controllers
             var nombreArchivo = $"Manejo de Presupuesto - {DateTime.Today.ToString("dd-MM-yy")}.xlsx";
 
             return GenerarExcel(nombreArchivo, transacciones);
-
-
         }
 
 

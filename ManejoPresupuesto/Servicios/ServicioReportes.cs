@@ -121,7 +121,6 @@ namespace ManejoPresupuesto.Servicios
             AsignarValoresAlViewBag(ViewBag, fechaInicio);
             var modelo = await repositorioTransacciones.ObtenerPorSemana(parametro);
             return modelo;
-
         }
     }
 }

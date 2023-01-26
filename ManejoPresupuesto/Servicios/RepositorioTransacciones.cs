@@ -136,7 +136,7 @@ namespace ManejoPresupuesto.Servicios
                                                                         SUM(Monto) AS Monto, cat.TipoOperacionId
                                                                         FROM Transacciones
                                                                         INNER JOIN Categorias cat
-                                                                        ON Transacciones.CategoriasId = cat.Id
+                                                                        ON Transacciones.CategoriaId = cat.Id
                                                                         WHERE Transacciones.UsuarioId= @usuarioId AND YEAR(FechaTransaccion) = @Año
                                                                         GROUP BY Month(FechaTransaccion), cat.TipoOperacionId", new {usuarioId, año });
         }
