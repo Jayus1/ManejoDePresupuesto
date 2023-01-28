@@ -1,12 +1,13 @@
 ﻿@{
     ViewData["Title"] = "Reporte en Calendario";
+    var codigo = "lol";
 }
 
 <partial name="_Submenu" model="SubMenuTransacciones.Calendario" />
 
 <div id="calendario"></div>
 
-<div class="modal fade" id="modalTransacciones" tabindex="1">
+<div class="modal fade" id="modalTransacciones" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -18,12 +19,12 @@
                     <thead>
                         <tr>
                             <th colspan="2" id="modalTablaFecha"></th>
-                            <th class="activo" id="modalTablaIngreso"></th>
+                            <th class="activo" id="modalTablaIngresos"></th>
                             <th class="pasivo" id="modalTablaGastos"></th>
                         </tr>
                     </thead>
 
-                    <tbody id="modalTAblaCuerpo">
+                    <tbody id="modalTablaCuerpo">
 
                     </tbody>
                 </table>
@@ -54,30 +55,30 @@
         });
 
         async function buscarTransaccionesPorFecha(fecha){
-            const reponse = await fetch(`/transacciones/ObtenerTransaccionesPorFecha?fecha=${fecha}`,
-            method: 'GET',
+            const response = await fetch(`/transacciones/ObtenerTransaccionesPorFecha?fecha=${fecha}`,
+            { method: 'GET',
             headers: {
                 'Content-Type':'application/json'
+            }
             });
 
             const json= await response.json();
 
             let ingresos = 0;
             let gastos= 0;
-            const TipoOperacionesIngresos= 1;
+            const tipoOperacionesIngresos= 1;
 
             const formateador= new Intl.NumberFormat('en-US',{
                 style: 'currency',
                 currency: 'USD'
             });
 
-
-            const filas=json.map(transacciones =>{
-                if(transaccion.tipoOperacionId == TipoOperacionesIngresos){
+            const filas=json.map(transaccion =>{
+                if(transaccion.tipoOperacionId === tipoOperacionesIngresos){
                     ingresos += transaccion.monto;
                 }
                 else{
-                    gastos += transaccion.monto
+                    gastos += transaccion.monto;
                 }
 
                 return `<tr>
@@ -92,18 +93,19 @@
 
             });
 
-            $("modalTablaCuerpo").html(filas);
-            $("modalTablaIngresos").html(formateador.format(ingresos));
-            $("modalTablaGastos").html(formateador.format(gastos));
-            $("modalTablaFlecha").html(fecha);
+                        console.log(json);
 
 
+            $("#modalTablaCuerpo").html(filas);
+            $("#modalTablaIngresos").html(formateador.format(ingresos));
+            $("#modalTablaGastos").html(formateador.format(gastos));
+            $("#modalTablaFecha").html(fecha);
 
             const modalTransacciones = 
-            new bootstrap.Modal(document.getElementById('modalTransacciones'));
+                new bootstrap.Modal(document.getElementById('modalTransacciones'));
 
             modalTransacciones.show();
-
         }
     </script>
+
 }

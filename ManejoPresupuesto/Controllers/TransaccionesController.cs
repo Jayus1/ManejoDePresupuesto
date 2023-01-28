@@ -306,8 +306,8 @@ namespace ManejoPresupuesto.Controllers
             var eventosCalendarios = transacciones.Select(transaccion => new EventoCalendario()
             {
                 Title = transaccion.Monto.ToString("N"),
-                Start = transaccion.FechaTransaccion.ToString("yyyy-MMMM-dd"),
-                End = transaccion.FechaTransaccion.ToString("yyyy-MMMM-dd"),
+                Start = transaccion.FechaTransaccion.ToString("yyyy-MM-dd"),
+                End = transaccion.FechaTransaccion.ToString("yyyy-MM-dd"),
                 Color = (transaccion.TipoOperacionId == TipoOperacion.Gastos) ? "Red" : null
             }); ;
 
