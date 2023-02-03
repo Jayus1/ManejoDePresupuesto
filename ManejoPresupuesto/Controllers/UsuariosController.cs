@@ -1,10 +1,17 @@
 ﻿using ManejoPresupuesto.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ManejoPresupuesto.Controllers
 {
     public class UsuariosController : Controller
     {
+        private readonly UserManager<Usuario> userManager;
+
+        public UsuariosController(UserManager<Usuario> userManager)
+        {
+            this.userManager = userManager;
+        }
         public IActionResult Registro()
         {
              
@@ -21,8 +28,22 @@ namespace ManejoPresupuesto.Controllers
                 return View(modelo);
             }
 
+            var usuario = new Usuario() { Email = modelo.Email };
+            var resultado = await userManager.CreateAsync(usuario, password: modelo.Password);
 
-            return RedirectToAction("Index","Transacciones");
+            if (resultado.Succeeded)
+            {
+                return RedirectToAction("Index", "Transacciones");
+            }
+            else
+            {
+                foreach(var error in resultado.Errors)
+                {
+                    ModelState.AddModelError(string.Empty, error.Description);
+                }
+
+                return View(modelo);
+            }
         }
 
         public IActionResult Index()

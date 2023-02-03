@@ -1,3 +1,4 @@
+using DocumentFormat.OpenXml.EMMA;
 using ManejoPresupuesto.Models;
 using ManejoPresupuesto.Servicios;
 using Microsoft.AspNetCore.Identity;
@@ -16,7 +17,13 @@ builder.Services.AddTransient<IRepositorioUsuarios, RepositorioUsuarios>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddTransient<IUserStore<Usuario>, UsuarioStore>();
-builder.Services.AddIdentityCore<Usuario>();
+builder.Services.AddIdentityCore<Usuario>(option =>
+{
+    option.Password.RequireNonAlphanumeric = false;
+    option.Password.RequireDigit = false;
+    option.Password.RequireLowercase = false;
+    option.Password.RequireUppercase = false;
+});
 
 var app = builder.Build();
 

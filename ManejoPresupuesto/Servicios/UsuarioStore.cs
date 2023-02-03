@@ -25,7 +25,6 @@ namespace ManejoPresupuesto.Servicios
 
         public void Dispose()
         {
-            throw new NotImplementedException();
         }
 
         public async Task<Usuario> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
