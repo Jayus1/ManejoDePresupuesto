@@ -5,7 +5,7 @@ namespace ManejoPresupuesto.Models
     public class RegistroViewModel
     {
         [Required(ErrorMessage ="El campo {0} es requerido")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "El campo debe ser una dirrecion de correo electronico valida")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es requerido")]

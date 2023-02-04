@@ -1,12 +1,22 @@
 using DocumentFormat.OpenXml.EMMA;
 using ManejoPresupuesto.Models;
 using ManejoPresupuesto.Servicios;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+var politicaDeUsuarioAutentificado = new AuthorizationPolicyBuilder()
+    .RequireAuthenticatedUser()
+    .Build();
+
+builder.Services.AddControllersWithViews(opciones=>
+{
+    opciones.Filters.Add(new AuthorizeFilter(politicaDeUsuarioAutentificado));  
+});
 builder.Services.AddTransient<IRepositorioTiposCuentas, RepositorioTiposCuentas>();
 builder.Services.AddTransient<IServicioUsuario, ServicioUsuarios>();
 builder.Services.AddTransient<IRepositorioCuentas, RepositorioCuentas>();
@@ -17,12 +27,23 @@ builder.Services.AddTransient<IRepositorioUsuarios, RepositorioUsuarios>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddTransient<IUserStore<Usuario>, UsuarioStore>();
+builder.Services.AddTransient<SignInManager<Usuario>>();
 builder.Services.AddIdentityCore<Usuario>(option =>
 {
     option.Password.RequireNonAlphanumeric = false;
     option.Password.RequireDigit = false;
     option.Password.RequireLowercase = false;
     option.Password.RequireUppercase = false;
+}).AddErrorDescriber<MensajesDeErrorIdentity>();
+
+builder.Services.AddAuthentication(option =>
+{
+    option.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+    option.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+    option.DefaultSignOutScheme = IdentityConstants.ApplicationScheme;
+}).AddCookie(IdentityConstants.ApplicationScheme, option =>
+{
+    option.LoginPath = "/Usuarios/Login";
 });
 
 var app = builder.Build();
@@ -43,6 +64,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 
