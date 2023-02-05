@@ -14,7 +14,7 @@ namespace ManejoPresupuesto.Servicios
 
         public async Task<IdentityResult> CreateAsync(Usuario user, CancellationToken cancellationToken)
         {
-            var id = await repositorioUsuarios.CrearUsuario(user);
+            user.Id = await repositorioUsuarios.CrearUsuario(user);
             return IdentityResult.Success;
         }
 

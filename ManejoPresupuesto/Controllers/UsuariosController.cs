@@ -56,7 +56,7 @@ namespace ManejoPresupuesto.Controllers
         public async Task<IActionResult> LogOut()
         {
             await HttpContext.SignOutAsync(IdentityConstants.ApplicationScheme);
-            return RedirectToAction("Index", "Transaccion");
+            return RedirectToAction("Index", "Transacciones");
         }
 
         [AllowAnonymous]
