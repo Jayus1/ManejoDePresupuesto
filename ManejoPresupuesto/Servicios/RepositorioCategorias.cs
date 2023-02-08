@@ -8,8 +8,9 @@ namespace ManejoPresupuesto.Servicios
     {
         Task Actualizar(Categoria categoria);
         Task Borrar(int id);
+        Task<int> Contar(int usuarioId);
         Task Crear(Categoria categoria);
-        Task<IEnumerable<Categoria>> Obtener(int usuarioId);
+        Task<IEnumerable<Categoria>> Obtener(int usuarioId, PaginacionViewModel paginacion);
         Task<IEnumerable<Categoria>> Obtener(int usuarioId, TipoOperacion tipoOperacionId);
         Task<Categoria> ObtenerPorId(int id, int usuarioId);
     }
@@ -33,12 +34,16 @@ namespace ManejoPresupuesto.Servicios
             categoria.Id = id;
         }
 
-        public async Task<IEnumerable<Categoria>> Obtener(int usuarioId)
+        public async Task<IEnumerable<Categoria>> Obtener(int usuarioId, PaginacionViewModel paginacion)
         {
             using var connection = new SqlConnection(connectionString);
-            return await connection.QueryAsync<Categoria>(@"SELECT * 
+            return await connection.QueryAsync<Categoria>(@$"SELECT * 
                                                             FROM Categorias 
-                                                            WHERE UsuarioId = @usuarioId", 
+                                                            WHERE UsuarioId = @usuarioId
+                                                            ORDER BY Name
+                                                            OFFSET {paginacion.RecordsASaltar}
+                                                            ROWS FETCH NEXT {paginacion.RecordsPorPagina}
+                                                            ROWS ONLY", 
                                                             new {usuarioId});
         }
         public async Task<IEnumerable<Categoria>> Obtener(int usuarioId, TipoOperacion tipoOperacionId)
@@ -71,7 +76,16 @@ namespace ManejoPresupuesto.Servicios
         {
            using var connection = new SqlConnection(connectionString);
             await connection.ExecuteAsync(@"DELETE Categorias WHERE Id= @Id", new {id});
+        }
 
+        public async Task<int> Contar(int usuarioId)
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.ExecuteScalarAsync<int>(@"
+                                                            SELECT COUNT(*) 
+                                                            FROM Categorias 
+                                                            WHERE UsuarioId= @usuarioId", 
+                                                            new { usuarioId });
         }
     }
 }

@@ -36,12 +36,22 @@ namespace ManejoPresupuesto.Controllers
             return RedirectToAction("Index");
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(PaginacionViewModel paginacion)
         {
             var usuarioId = servicioUsuario.ObtenerUsuarioId();
-            var categoria = await repositorioCategorias.Obtener(usuarioId);
+            var categoria = await repositorioCategorias.Obtener(usuarioId, paginacion);
+            var totalCategorias = await repositorioCategorias.Contar(usuarioId);
 
-            return View(categoria);
+            var respuestaVm = new PaginacionRespuesta <Categoria>
+            {
+                Elementos = categoria,
+                Pagina = paginacion.Pagina,
+                RecordsPorPagina = paginacion.RecordsPorPagina,
+                CantidadTotalDeRecords = totalCategorias,
+                BaseURL = "/Categorias"
+            };
+
+            return View(respuestaVm);
         }
         
         public async Task<IActionResult> Editar(int id)
