@@ -60,7 +60,7 @@ namespace ManejoPresupuesto.Controllers
         }
 
         [AllowAnonymous]
-        public async Task<IActionResult> Login()
+        public IActionResult Login()
         {
             return View();
         }

@@ -86,7 +86,13 @@ namespace ManejoPresupuesto.Controllers
             (int usuarioId, TipoOperacion tipoOperacion)
         {
             var categorias = await repositorioCategorias.Obtener(usuarioId, tipoOperacion);
-            return categorias.Select(x => new SelectListItem(x.Nombre, x.Id.ToString()));
+            var resultado = categorias.Select(x => new SelectListItem(x.Nombre, x.Id.ToString())).ToList();
+
+            var opcionPorDefecto = new SelectListItem("--Seleccion un valor--", "0", true);
+
+            resultado.Insert(0,opcionPorDefecto);
+
+            return resultado;
         }
 
         [HttpPost]

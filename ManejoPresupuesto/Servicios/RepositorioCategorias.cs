@@ -40,7 +40,7 @@ namespace ManejoPresupuesto.Servicios
             return await connection.QueryAsync<Categoria>(@$"SELECT * 
                                                             FROM Categorias 
                                                             WHERE UsuarioId = @usuarioId
-                                                            ORDER BY Name
+                                                            ORDER BY Nombre
                                                             OFFSET {paginacion.RecordsASaltar}
                                                             ROWS FETCH NEXT {paginacion.RecordsPorPagina}
                                                             ROWS ONLY", 
